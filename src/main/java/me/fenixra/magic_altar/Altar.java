@@ -1,8 +1,7 @@
 package me.fenixra.magic_altar;
 
-import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import me.fenixra.magic_altar.files.ConfigFile;
+import me.fenixra.magic_altar.utils.Hologram;
 import me.fenixra.magic_altar.utils.Utils;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -98,25 +97,25 @@ public class Altar {
         return x2 < x1 + n && x2 > x1 - n && z2 < z1 + n && z2 > z1 - n && y2 < y1 + n && y2 > y1 - n;
     }
 
-    public void UpdateTimer(List<Player> players1) {
-        List<Player> players2 = new ArrayList<>();
+    public void UpdateTimer(List<Player> playersInBorder) {
+        List<Player> playersPendingRemove = new ArrayList<>();
         for (Player p : players.keySet()) {
-            if (!players1.contains(p)) {
-                players2.add(p);
+            if (!playersInBorder.contains(p)) {
+                playersPendingRemove.add(p);
                 continue;
             }
             if (!p.isOnline()) {
-                players2.add(p);
+                playersPendingRemove.add(p);
                 continue;
             }
             if (p.isDead()) {
-                players2.add(p);
+                playersPendingRemove.add(p);
             }
         }
-        for (Player p : players2) {
+        for (Player p : playersPendingRemove) {
             players.remove(p);
         }
-        for (Player p : players1) {
+        for (Player p : playersInBorder) {
             if (players.containsKey(p)) continue;
             players.put(p, 0);
         }
@@ -200,7 +199,7 @@ public class Altar {
             this.altar = altar;
             frequency = data.getInt("altars." + altar.id + ".pvpChange.frequency");
             timer = frequency;
-            hologram = HologramsAPI.createHologram(Main.getInstance(), altar.loc);
+            hologram = new Hologram(altar.loc);
             this.updateHolo();
             List<String> cmds = data.getStringList("altars." + altar.id + ".pvpChange.off.cmds");
 
@@ -297,14 +296,15 @@ public class Altar {
             } else {
                 holo = data.getStringList("altars." + altar.id + ".pvpChange.off.holo");
             }
-            hologram.clearLines();
+            List<String> lines=new ArrayList<>();
             for (String s : holo) {
                 if (s.equalsIgnoreCase("%timer%")) {
-                    hologram.appendTextLine(Utils.getProgressBar(timer, frequency, 10, "\u2B1B", "§a", "§7"));
+                    lines.add(Utils.getProgressBar(timer, frequency, 10, "\u2B1B", "§a", "§7"));
                 } else {
-                    hologram.appendTextLine(s.replace("&", "§"));
+                    lines.add(Utils.colorFormat(s));
                 }
             }
+            hologram.setLines(lines);
 
         }
 

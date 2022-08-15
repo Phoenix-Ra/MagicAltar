@@ -15,18 +15,11 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         instance=this;
 
-        //I've added it to fix an issue on plugin load. Idk why, but it doesn't care about
-        // HolographicDisplay dependency and enables before that plugin.
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                Main.getInstance().getCommand("altar").setExecutor(new AltarCommand(Main.getInstance()));
-                altarM=new AltarManager();
+        Main.getInstance().getCommand("altar").setExecutor(new AltarCommand(Main.getInstance()));
+        altarM=new AltarManager();
                 fileManager=new FenixFileManager(Main.getInstance());
                 fileManager.addFile(new ConfigFile(fileManager)).addFile(new DataFile(fileManager));
                 fileManager.loadfiles();
-            }
-        }.runTaskTimer(this,20,0);
     }
 
     public void reload(){

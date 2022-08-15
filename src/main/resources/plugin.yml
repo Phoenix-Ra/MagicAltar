@@ -3,7 +3,6 @@ name: MagicAltar
 version: 1.0
 author: PhoenixRa
 website: https://www.spigotmc.org/resources/100438/
-depend: [HolographicDisplays]
 commands:
   altar:
     description: altar cmd

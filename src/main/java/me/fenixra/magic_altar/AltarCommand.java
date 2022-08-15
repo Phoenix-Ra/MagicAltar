@@ -2,6 +2,7 @@ package me.fenixra.magic_altar;
 
 import com.google.common.collect.Maps;
 import me.fenixra.magic_altar.utils.FenixCommand;
+import me.fenixra.magic_altar.utils.Utils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -54,8 +55,9 @@ public class AltarCommand extends FenixCommand {
             final SubCommand info = methods.get(entry).getAnnotation(SubCommand.class);
             final String usage = info.usage().isEmpty() ? "" : (" " + (info.usage()));
             final String desc = info.description();
-            this.sender.sendMessage(  usage + " &7- &f" + desc);
+            this.sender.sendMessage(Utils.colorFormat(usage + " &7- &f" + desc));
         }
+
 
     }
 
