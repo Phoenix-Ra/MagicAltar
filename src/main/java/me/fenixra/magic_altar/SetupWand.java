@@ -29,6 +29,11 @@ public class SetupWand {
     public SetupWand(Player player, Altar altar) {
         this.player=player;
         this.altar=altar;
+
+        wandItem=new ItemStack(Material.BLAZE_ROD);
+        ItemMeta meta = wandItem.getItemMeta();
+        meta.setDisplayName("§cClick to make an altar");
+        wandItem.setItemMeta(meta);
     }
     public void giveWand() {
         player.getInventory().setItem(4,wandItem);
