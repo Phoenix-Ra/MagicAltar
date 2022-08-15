@@ -4,6 +4,7 @@ import me.fenixra.magic_altar.files.ConfigFile;
 import me.fenixra.magic_altar.files.DataFile;
 import me.fenixra.magic_altar.utils.FenixFileManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class Main extends JavaPlugin {
     private static Main instance;
@@ -13,11 +14,19 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         instance=this;
-        this.getCommand("altar").setExecutor(new AltarCommand(this));
-        altarM=new AltarManager();
-        fileManager=new FenixFileManager(this);
-        fileManager.addFile(new ConfigFile(fileManager)).addFile(new DataFile(fileManager));
-        fileManager.loadfiles();
+
+        //I've added it to fix an issue on plugin load. Idk why, but it doesn't care about
+        // HolographicDisplay dependency and enables before that plugin.
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                Main.getInstance().getCommand("altar").setExecutor(new AltarCommand(Main.getInstance()));
+                altarM=new AltarManager();
+                fileManager=new FenixFileManager(Main.getInstance());
+                fileManager.addFile(new ConfigFile(fileManager)).addFile(new DataFile(fileManager));
+                fileManager.loadfiles();
+            }
+        }.runTaskTimer(this,20,0);
     }
 
     public void reload(){
