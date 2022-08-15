@@ -1,0 +1,58 @@
+altars:
+  example:
+    location:
+      world: world
+      posX: -2.5
+      posY: 63.5
+      posZ: 2.5
+    radius: 20
+    don_nums:
+      '1':
+        - staff:300
+        - god:40
+        - premium:35
+        - vip:30
+        - default:10
+    cmds:
+      - mgive {player} sp {donator_num-1}
+    frequency: 30
+    title: '&aReceived'
+    subtitle: '&a{donator_num-1} &dPoints'
+    message: '&6MagicAltar &a➔ &7You received &a{donator_num-1} &dPoints'
+    pvpChange:
+      enabled: true
+      frequency: 295
+      on:
+        cmds:
+          - rg flag altar_c -w world pvp allow
+          - rg flag altar_c -w world invincible deny
+          - rg flag altar_c -w world fall-damage allow
+        msg: '&6MagicAltar &a➔ &cTime to fight!'
+        title: '&cPvp is on!'
+        sound: entity_wither_spawn:1.5f:1.5f
+        reward-on-kill:
+          - givejuicypoints {player} sp {donator_num-1}
+          - msg:&6MagicAltar &a➔ &cYou received a reward for killing a player!
+          - title:&a+{donator_num-1} Points
+        holo:
+          - '&eStatus:'
+          - '&c&l⚔ &nPvP active&c&l ⚔'
+          - '&8========================='
+          - '&eNext state:'
+          - '%timer%'
+          - '&8========================='
+      off:
+        cmds:
+          - rg flag altar_c -w world pvp deny
+          - rg flag altar_c -w world invincible allow
+          - rg flag altar_c -w world fall-damage deny
+        msg: '&6MagicAltar &a➔ &ePeace time!'
+        title: '&aPvp is off!'
+        sound: ENTITY_WITCH_AMBIENT:1.5f:1.5f
+        holo:
+          - '&eStatus:'
+          - '&c&l⚔ &nPvP disabled&c&l ⚔'
+          - '&8========================='
+          - '&eNext state:'
+          - '%timer%'
+          - '&8========================='
