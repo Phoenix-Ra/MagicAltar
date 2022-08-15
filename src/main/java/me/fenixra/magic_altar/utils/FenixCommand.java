@@ -12,7 +12,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.logging.Level;
 
-public abstract class PhoenixCommand implements  CommandExecutor {
+public abstract class FenixCommand implements  CommandExecutor {
     private String usage;
     private String permission;
     private boolean allowConsole;
@@ -24,7 +24,7 @@ public abstract class PhoenixCommand implements  CommandExecutor {
     private String[] args;
     private boolean adminCmd = false;
 
-    public PhoenixCommand() {
+    public FenixCommand() {
         this.usage = null;
         this.permission = null;
         this.allowConsole = true;

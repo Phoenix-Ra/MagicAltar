@@ -8,13 +8,13 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class PhoenixFile {
+public abstract class FenixFile {
     private final String fileName;
     private java.io.File File;
     private FileConfiguration fileConf;
-    private final PhoenixFileManager fileM;
-    private final PhoenixFileClass fileClass;
-    public PhoenixFile(PhoenixFileManager fileM, String name, PhoenixFileClass fileClass){
+    private final FenixFileManager fileM;
+    private final FenixFileClass fileClass;
+    public FenixFile(FenixFileManager fileM, String name, FenixFileClass fileClass){
         this.fileM=fileM;
         fileName=name;
         this.fileClass=fileClass;
@@ -37,8 +37,8 @@ public abstract class PhoenixFile {
 
                 for(Field f : fileClass.getClass().getFields()) {
                     i++;
-                    PhoenixFileClass.ConfigHeader head = f.getAnnotation(PhoenixFileClass.ConfigHeader.class);
-                    PhoenixFileClass.ConfigKey key = f.getAnnotation(PhoenixFileClass.ConfigKey.class);
+                    FenixFileClass.ConfigHeader head = f.getAnnotation(FenixFileClass.ConfigHeader.class);
+                    FenixFileClass.ConfigKey key = f.getAnnotation(FenixFileClass.ConfigKey.class);
 
                     if(key==null) {
                         continue;
@@ -118,7 +118,7 @@ public abstract class PhoenixFile {
                 int i = -1;
                 for(Field f : fileClass.getClass().getFields()) {
                     i++;
-                    PhoenixFileClass.ConfigKey key = f.getAnnotation(PhoenixFileClass.ConfigKey.class);
+                    FenixFileClass.ConfigKey key = f.getAnnotation(FenixFileClass.ConfigKey.class);
                     if(key.isSection()) {
                         continue;
                     }

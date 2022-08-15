@@ -1,11 +1,11 @@
 package me.fenixra.magic_altar.files;
 
-import me.fenixra.magic_altar.utils.PhoenixFile;
-import me.fenixra.magic_altar.utils.PhoenixFileClass;
-import me.fenixra.magic_altar.utils.PhoenixFileManager;
+import me.fenixra.magic_altar.utils.FenixFile;
+import me.fenixra.magic_altar.utils.FenixFileClass;
+import me.fenixra.magic_altar.utils.FenixFileManager;
 
-public class ConfigFile extends PhoenixFile {
-    public ConfigFile(PhoenixFileManager fileM) {
+public class ConfigFile extends FenixFile {
+    public ConfigFile(FenixFileManager fileM) {
         super(fileM, "config", new ConfigClass());
     }
     @Override
@@ -20,7 +20,7 @@ public class ConfigFile extends PhoenixFile {
 
 
 
-    public static class ConfigClass extends PhoenixFileClass {
+    public static class ConfigClass extends FenixFileClass {
 
         @ConfigHeader(value = {"#Sound type of the reward"})
         @ConfigKey(path="reward_sound", space= "      ")

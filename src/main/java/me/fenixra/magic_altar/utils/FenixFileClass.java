@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-public class PhoenixFileClass {
+public class FenixFileClass {
 
 
     public Object getReference(int number) {

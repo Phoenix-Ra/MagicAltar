@@ -2,8 +2,8 @@ package me.fenixra.magic_altar.files;
 
 import me.fenixra.magic_altar.Altar;
 import me.fenixra.magic_altar.Main;
-import me.fenixra.magic_altar.utils.PhoenixFile;
-import me.fenixra.magic_altar.utils.PhoenixFileManager;
+import me.fenixra.magic_altar.utils.FenixFile;
+import me.fenixra.magic_altar.utils.FenixFileManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
@@ -11,8 +11,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class DataFile extends PhoenixFile {
-    public DataFile(PhoenixFileManager fileM) {
+public class DataFile extends FenixFile {
+    public DataFile(FenixFileManager fileM) {
         super(fileM, "data", null);
     }
 

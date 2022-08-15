@@ -11,15 +11,15 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PhoenixFileManager {
+public class FenixFileManager {
     JavaPlugin plugin;
-    private final HashMap<String, PhoenixFile> files= new HashMap<>();
-    public PhoenixFileManager addFile(PhoenixFile file) {
+    private final HashMap<String, FenixFile> files= new HashMap<>();
+    public FenixFileManager addFile(FenixFile file) {
         files.put(file.getFileName(),file);
         return this;
     }
     public void loadfiles() {
-        for(Map.Entry<String, PhoenixFile> f : files.entrySet()) {
+        for(Map.Entry<String, FenixFile> f : files.entrySet()) {
             if(!f.getValue().load()) {
                 plugin.getLogger().severe("Error occurred while loading configuration file "+f.getKey()+".yml  Probably, file is corrupted or has a syntax mistake");
                 return;
@@ -43,7 +43,7 @@ public class PhoenixFileManager {
         files.remove(name);
     }
     public void reloadFiles() {
-        for(Map.Entry<String, PhoenixFile> f : files.entrySet()) {
+        for(Map.Entry<String, FenixFile> f : files.entrySet()) {
             if(!f.getValue().reload()) {
                 plugin.getLogger().severe("Error occurred while loading configuration file "+f.getKey()+".yml  Probably, file is corrupted or has a syntax mistake");
 
@@ -66,7 +66,7 @@ public class PhoenixFileManager {
             return null;
         }
     }
-    public PhoenixFile getFile(String name) {
+    public FenixFile getFile(String name) {
         return files.get(name);
     }
     public JavaPlugin getPlugin() {

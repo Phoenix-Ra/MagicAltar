@@ -2,18 +2,18 @@ package me.fenixra.magic_altar;
 
 import me.fenixra.magic_altar.files.ConfigFile;
 import me.fenixra.magic_altar.files.DataFile;
-import me.fenixra.magic_altar.utils.PhoenixFileManager;
+import me.fenixra.magic_altar.utils.FenixFileManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
     private static Main instance;
     private AltarManager altarM;
-    private PhoenixFileManager fileManager;
+    private FenixFileManager fileManager;
 
     @Override
     public void onEnable() {
         instance=this;
-        fileManager=new PhoenixFileManager();
+        fileManager=new FenixFileManager();
         fileManager.addFile(new ConfigFile(fileManager)).addFile(new DataFile(fileManager));
         fileManager.loadfiles();
         this.getCommand("altar").setExecutor(new AltarCommand(this));

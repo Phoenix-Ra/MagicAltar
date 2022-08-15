@@ -1,13 +1,13 @@
 package me.fenixra.magic_altar;
 
 import com.google.common.collect.Maps;
-import me.fenixra.magic_altar.utils.PhoenixCommand;
+import me.fenixra.magic_altar.utils.FenixCommand;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-public class AltarCommand extends PhoenixCommand {
+public class AltarCommand extends FenixCommand {
     private final Main plugin;
     private final Map<String, Method> methods = Maps.newLinkedHashMap();
 
