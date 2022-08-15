@@ -91,19 +91,19 @@ public abstract class FenixCommand implements  CommandExecutor {
     }
 
     protected void reply(final CommandSender sender, final boolean success, final String message, final Object... args) {
-        final String text = this.prefix + message.replaceAll("&", "§");
+        final String text = this.prefix + this.prefix +" "+ message.replaceAll("&", "§");
         sender.sendMessage(text);
     }
 
     protected void reply(final Player p, final String message) {
-        final String text = this.prefix + message.replaceAll("&", "§");
+        final String text = this.prefix +" "+ message.replaceAll("&", "§");
         p.sendMessage(text);
     }
     protected void replyException(final Exception exception, final String messageToSender) {
         exception.printStackTrace();
         Bukkit.getLogger().log(Level.SEVERE, prefix+ " §cUnexpected error occurred while trying to execute the command! ", exception);
 
-        final String text = this.prefix + messageToSender.replaceAll("&", "§");
+        final String text = this.prefix + this.prefix +" "+ messageToSender.replaceAll("&", "§");
         sender.sendMessage(text);
     }
 

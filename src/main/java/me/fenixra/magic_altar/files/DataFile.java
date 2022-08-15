@@ -18,6 +18,7 @@ public class DataFile extends FenixFile {
 
     @Override
     public boolean handleLoad() {
+        SetupAltars();
         return true;
     }
 
@@ -29,7 +30,7 @@ public class DataFile extends FenixFile {
     }
     private void SetupAltars() {
         for(String path: this.getFileC().getConfigurationSection("altars").getKeys(false)) {
-            if(this.getFileC().contains("altars."+path+".location.world")) {
+            if(!this.getFileC().contains("altars."+path+".location.world")) {
                 Main.getInstance().getLogger().severe("CANNOT ADD ALTAR WITH ID " +path+" ... WORLD DOESN'T SPECIFIED");
                 continue;
             }else if(Bukkit.getWorld(this.getFileC().getString("altars."+path+".location.world"))==null) {

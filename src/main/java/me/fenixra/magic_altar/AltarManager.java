@@ -33,6 +33,7 @@ public class AltarManager extends BukkitRunnable implements Listener {
     public void clearAll() {
         cancel();
         for (Altar altar : altars.values()) {
+            if(altar.getPvpChanger()==null) continue;
             if (altar.getPvpChanger().hologram != null) {
                 altar.getPvpChanger().hologram.delete();
             }

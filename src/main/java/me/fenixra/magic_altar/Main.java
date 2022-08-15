@@ -13,12 +13,11 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         instance=this;
-        fileManager=new FenixFileManager();
-        fileManager.addFile(new ConfigFile(fileManager)).addFile(new DataFile(fileManager));
-        fileManager.loadfiles();
         this.getCommand("altar").setExecutor(new AltarCommand(this));
         altarM=new AltarManager();
-
+        fileManager=new FenixFileManager(this);
+        fileManager.addFile(new ConfigFile(fileManager)).addFile(new DataFile(fileManager));
+        fileManager.loadfiles();
     }
 
     public void reload(){

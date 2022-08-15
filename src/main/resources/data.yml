@@ -22,7 +22,7 @@ altars:
     pvpChange:
       enabled: true
       frequency: 295
-      on:
+      'on':
         cmds:
           - rg flag altar_c -w world pvp allow
           - rg flag altar_c -w world invincible deny
@@ -41,7 +41,7 @@ altars:
           - '&eNext state:'
           - '%timer%'
           - '&8========================='
-      off:
+      'off':
         cmds:
           - rg flag altar_c -w world pvp deny
           - rg flag altar_c -w world invincible allow

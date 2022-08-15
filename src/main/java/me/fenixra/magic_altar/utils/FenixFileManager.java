@@ -14,6 +14,9 @@ import java.util.Map;
 public class FenixFileManager {
     JavaPlugin plugin;
     private final HashMap<String, FenixFile> files= new HashMap<>();
+    public FenixFileManager(JavaPlugin plugin){
+        this.plugin=plugin;
+    }
     public FenixFileManager addFile(FenixFile file) {
         files.put(file.getFileName(),file);
         return this;
