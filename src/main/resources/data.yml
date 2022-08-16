@@ -26,7 +26,7 @@ altars:
     #Subtitle on reward
     subtitle: '&a{donator_num-1} &dPoints'
     #Message on reward
-    message: '&6MagicAltar &a➔ &7You received &a{donator_num-1} &dPoints'
+    message: '&6MagicAltar &a-> &7You received &a{donator_num-1} &dPoints'
     #Feature that you can use to enable/disable pvp (in future releases i'll add uncountable amount of states support)
     pvpChange:
       enabled: true
@@ -41,7 +41,7 @@ altars:
           - rg flag altar_c -w world fall-damage allow
         #These are all on state activation
         #Broadcast message who in radius of an altar
-        msg: '&6MagicAltar &a➔ &cTime to fight!'
+        msg: '&6MagicAltar &a-> &cTime to fight!'
         #Broadcast title who in radius of an altar
         title: '&cPvp is on!'
         #Broadcast title who in radius of an altar
@@ -55,7 +55,7 @@ altars:
         #Hologram displayed in that state
         holo:
           - '&eStatus:'
-          - '&c&l⚔ &nPvP active&c&l ⚔'
+          - '&c&lx &nPvP active&c&l x'
           - '&8========================='
           - '&eNext state:'
           - '%timer%'
@@ -65,13 +65,13 @@ altars:
           - rg flag altar_c -w world pvp deny
           - rg flag altar_c -w world invincible allow
           - rg flag altar_c -w world fall-damage deny
-        msg: '&6MagicAltar &a➔ &ePeace time!'
+        msg: '&6MagicAltar &a-> &ePeace time!'
         title: '&aPvp is off!'
         subtitle: '&cMagicAltar example'
         sound: ENTITY_WITCH_AMBIENT:1.5f:1.5f
         holo:
           - '&eStatus:'
-          - '&c&l⚔ &nPvP disabled&c&l ⚔'
+          - '&c&lx &nPvP disabled&c&l x'
           - '&8========================='
           - '&eNext state:'
           - '%timer%'
