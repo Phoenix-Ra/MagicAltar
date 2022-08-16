@@ -50,7 +50,6 @@ public class AltarManager extends BukkitRunnable implements Listener {
 
     public void addAltar(Altar altar) {
         altars.put(altar.getId(), altar);
-        Main.getInstance().getLogger().info("ALTAR WITH ID " + altar.getId() + " SUCCESSFULLY ADDED");
     }
 
     public void removeAltar(String id) {
@@ -90,9 +89,9 @@ public class AltarManager extends BukkitRunnable implements Listener {
                             wand.getAltar().setLocation(event.getClickedBlock().getLocation());
                             wand.getAltar().FinishEdit();
                             this.addAltar(wand.getAltar());
-                            Main.getInstance().getDataFile().addAltar(wand.getAltar());
+                            Main.getInstance().getAltarsPackage().saveAltar(wand.getAltar());
                             player.getInventory().remove(event.getItem());
-                            player.sendMessage("§aAltar has been successfully added");
+                            player.sendMessage("§aAltar has been successfully teleported to a new location");
                             event.setCancelled(true);
                             return;
                         }
@@ -100,7 +99,7 @@ public class AltarManager extends BukkitRunnable implements Listener {
 
                         Altar altar = new Altar(wand);
                         this.addAltar(altar);
-                        Main.getInstance().getDataFile().addAltar(altar);
+                        Main.getInstance().getAltarsPackage().saveAltar(altar);
                         player.getInventory().remove(event.getItem());
                         player.sendMessage("§aAltar has been successfully added");
                         event.setCancelled(true);

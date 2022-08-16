@@ -39,8 +39,8 @@ public class Altar {
         this.rewardSubtitle = Utils.colorFormat(subtitle);
         this.rewardMessage = Utils.colorFormat(message);
         donate_nums = don_nums;
-        if (Main.getInstance().getDataFile().getFileC().contains("altars." + id + ".pvpChange.enabled")) {
-            if (Main.getInstance().getDataFile().getFileC().getBoolean("altars." + id + ".pvpChange.enabled")) {
+        if (Main.getInstance().getAltarsPackage().getAltarConfig(getId()).contains( "pvpChange.enabled")) {
+            if (Main.getInstance().getAltarsPackage().getAltarConfig(getId()).getBoolean( "pvpChange.enabled")) {
                 pvpChanger = new PvpChanger(this);
             }
         }
@@ -234,13 +234,13 @@ public class Altar {
         PvpChanger(Altar altar) {
             this.altar = altar;
 
-            FileConfiguration data = Main.getInstance().getDataFile().getFileC();
-            frequency = data.getInt("altars." + altar.getId() + ".pvpChange.frequency");
+            FileConfiguration data = Main.getInstance().getAltarsPackage().getAltarConfig(altar.getId());
+            frequency = data.getInt("pvpChange.frequency");
             timer = frequency;
 
             hologram = new Hologram(altar.loc, ConfigFile.ConfigClass.heightBetweenHoloLines * -1);
             this.updateHolo();
-            List<String> cmds = data.getStringList("altars." + altar.getId() + ".pvpChange.off.cmds");
+            List<String> cmds = data.getStringList( "pvpChange.off.cmds");
 
             for (String s : cmds) {
                 Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), s);
@@ -260,10 +260,10 @@ public class Altar {
         }
 
         protected void updateHolo() {
-            FileConfiguration data = Main.getInstance().getDataFile().getFileC();
+            FileConfiguration data = Main.getInstance().getAltarsPackage().getAltarConfig(altar.getId());
             List<String> holo;
-            holo = state? data.getStringList("altars." + altar.getId() + ".pvpChange.on.holo") :
-                          data.getStringList("altars." + altar.getId() + ".pvpChange.off.holo");
+            holo = state? data.getStringList("pvpChange.on.holo") :
+                          data.getStringList( "pvpChange.off.holo");
 
             List<String> lines = new ArrayList<>();
             for (String s : holo) {
@@ -277,26 +277,26 @@ public class Altar {
 
         }
         public void changeState() {
-            FileConfiguration data = Main.getInstance().getDataFile().getFileC();
+            FileConfiguration data = Main.getInstance().getAltarsPackage().getAltarConfig(altar.getId());
 
             String stateString = state ? "off" : "on";
             Sound sound = null;
             float n = 1.0f;
             float n1 = 1.0f;
-            if (data.contains("altars." + altar.getId() + ".pvpChange." + stateString + ".sound")) {
-                sound = Sound.valueOf(data.getString("altars." + altar.getId() + ".pvpChange." + stateString + ".sound").split(":")[0].toUpperCase());
-                n = Float.parseFloat(data.getString("altars." + altar.getId() + ".pvpChange." + stateString + ".sound").split(":")[1]);
-                n1 = Float.parseFloat(data.getString("altars." + altar.getId() + ".pvpChange." + stateString + ".sound").split(":")[2]);
+            if (data.contains("pvpChange." + stateString + ".sound")) {
+                sound = Sound.valueOf(data.getString("pvpChange." + stateString + ".sound").split(":")[0].toUpperCase());
+                n = Float.parseFloat(data.getString("pvpChange." + stateString + ".sound").split(":")[1]);
+                n1 = Float.parseFloat(data.getString("pvpChange." + stateString + ".sound").split(":")[2]);
             }
 
             //Inform players
-            String msg = data.getString("altars." + altar.getId() + ".pvpChange." + stateString + ".msg");
+            String msg = data.getString("pvpChange." + stateString + ".msg");
             if (msg != null) msg = Utils.colorFormat(msg);
 
-            String title = data.getString("altars." + altar.getId() + ".pvpChange." + stateString + ".title");
+            String title = data.getString( "pvpChange." + stateString + ".title");
             if (title != null) title = Utils.colorFormat(title);
 
-            String subTitle = data.getString("altars." + altar.getId() + ".pvpChange." + stateString + ".subtitle");
+            String subTitle = data.getString("pvpChange." + stateString + ".subtitle");
             if (subTitle != null) subTitle = Utils.colorFormat(subTitle);
 
             for (Player p : altar.getNearbyPlayers()) {
@@ -312,7 +312,7 @@ public class Altar {
             }
 
             //ChangeState commands
-            List<String> cmds = data.getStringList("altars." + altar.getId() + ".pvpChange." + stateString + ".cmds");
+            List<String> cmds = data.getStringList("pvpChange." + stateString + ".commands");
             for (String s : cmds) {
                 Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), s);
             }
@@ -325,8 +325,8 @@ public class Altar {
         public void rewardForKill(Player p) {
 
             if (state) {
-                FileConfiguration data = Main.getInstance().getDataFile().getFileC();
-                for (String s : data.getStringList("altars." + altar.getId() + ".pvpChange.on.reward-on-kill")) {
+                FileConfiguration data = Main.getInstance().getAltarsPackage().getAltarConfig(altar.getId());
+                for (String s : data.getStringList( "pvpChange.on.reward-on-kill")) {
                     s = altar.replaceDonatorNums(p, s);
 
                     if (s.contains("msg:")) {

@@ -1,7 +1,7 @@
 package me.fenixra.magic_altar;
 
+import me.fenixra.magic_altar.files.AltarsPackage;
 import me.fenixra.magic_altar.files.ConfigFile;
-import me.fenixra.magic_altar.files.DataFile;
 import me.fenixra.magic_altar.utils.FenixFileManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,6 +17,7 @@ public class Main extends JavaPlugin {
     private static Main instance;
     private AltarManager altarM;
     private FenixFileManager fileManager;
+    private AltarsPackage altarsPackage;
 
     @Override
     public void onEnable() {
@@ -25,8 +26,10 @@ public class Main extends JavaPlugin {
         Main.getInstance().getCommand("altar").setExecutor(new AltarCommand(Main.getInstance()));
         altarM=new AltarManager();
         fileManager=new FenixFileManager(Main.getInstance());
-        fileManager.addFile(new ConfigFile(fileManager)).addFile(new DataFile(fileManager));
+        fileManager.addFile(new ConfigFile(fileManager));
         fileManager.loadfiles();
+        altarsPackage=new AltarsPackage();
+        altarsPackage.reloadAction();
         try {
             if ((new Metrics(this, 16158)).isEnabled()) {
                 Bukkit.getConsoleSender().sendMessage("§7Metrics loaded successfully");
@@ -44,6 +47,7 @@ public class Main extends JavaPlugin {
     }
     public void reload(){
         fileManager.reloadFiles();
+        altarsPackage.reloadAction();
     }
 
     private void checkVersion() {
@@ -90,7 +94,7 @@ public class Main extends JavaPlugin {
     public AltarManager getAltarM() {
         return altarM;
     }
-    public DataFile getDataFile() {
-        return (DataFile) fileManager.getFile("data");
+    public AltarsPackage getAltarsPackage() {
+        return altarsPackage;
     }
 }
