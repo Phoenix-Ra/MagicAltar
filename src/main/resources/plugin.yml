@@ -2,7 +2,7 @@ main: me.fenixra.magic_altar.Main
 name: MagicAltar
 version: 1.0
 author: PhoenixRa
-website: https://www.spigotmc.org/resources/100438/
+website: https://www.spigotmc.org/resources/104593/
 commands:
   altar:
     description: altar cmd
