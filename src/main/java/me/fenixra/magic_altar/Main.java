@@ -75,6 +75,9 @@ public class Main extends JavaPlugin {
             e.printStackTrace();
         }
     }
+    public int getServerVersion(){
+        return Integer.parseInt(Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3].split("_")[1]);
+    }
     public static void doSync(Runnable runnable) {
         instance.getServer().getScheduler().runTask(instance, runnable);
     }

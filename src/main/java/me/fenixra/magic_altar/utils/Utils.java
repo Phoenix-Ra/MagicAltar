@@ -1,6 +1,7 @@
 package me.fenixra.magic_altar.utils;
 
 
+import me.fenixra.magic_altar.Main;
 import net.md_5.bungee.api.ChatColor;
 
 import java.util.regex.Matcher;
@@ -9,10 +10,12 @@ import java.util.regex.Pattern;
 public class Utils {
 
     public static String colorFormat(String s){
-        try{
-            s=translateHexCodes(s);
-        }catch (Exception e){
-            e.printStackTrace();
+        if (Main.getInstance().getServerVersion() > 15) {
+            try {
+                s = translateHexCodes(s);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         s= ChatColor.translateAlternateColorCodes('&',s);
         return s;
