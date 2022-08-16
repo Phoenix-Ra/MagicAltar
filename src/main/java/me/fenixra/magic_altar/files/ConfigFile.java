@@ -28,19 +28,19 @@ public class ConfigFile extends FenixFile {
 
         @ConfigHeader(value = { "#Sound param1 of the reward"})
         @ConfigKey(path="sound_param1", space= "")
-        public static float sound_param1=1.0f;
+        public static double sound_param1=1.0f;
 
         @ConfigHeader(value = { "#Sound param2 of the reward"})
         @ConfigKey(path="sound_param2", space= "")
-        public static float sound_param2=1.0f;
+        public static double sound_param2=1.0f;
 
         @ConfigHeader(value = { "#Action_bar msg that shows how much time left before reward"})
         @ConfigKey(path="msg_reward_time_left", space= "")
-        public static String msg_reward_time_left="§c{time}s §aLeft";
+        public static String msg_reward_time_left="&c{time}s &aLeft";
 
         @ConfigHeader(value = { "#Action_bar msg that appears when reward received"})
         @ConfigKey(path="msg_rewarded", space= "")
-        public static String msg_rewarded="§aReceived";
+        public static String msg_rewarded="&aReceived";
 
 
         public Object getReference(int number) {
