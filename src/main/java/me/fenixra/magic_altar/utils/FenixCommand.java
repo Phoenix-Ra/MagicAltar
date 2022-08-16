@@ -91,7 +91,7 @@ public abstract class FenixCommand implements  CommandExecutor {
     }
 
     protected void reply(final CommandSender sender, final boolean success, final String message, final Object... args) {
-        final String text = this.prefix + this.prefix +" "+ message.replaceAll("&", "§");
+        final String text = this.prefix +" "+ message.replaceAll("&", "§");
         sender.sendMessage(text);
     }
 
