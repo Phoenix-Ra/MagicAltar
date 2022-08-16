@@ -27,11 +27,11 @@ public class AltarManager extends BukkitRunnable implements Listener {
 
     public void addAltar(Altar altar) {
         altars.put(altar.getId(), altar);
-        Main.getInstance().getLogger().info("ALTAR WITH ID " + altar.getId() + " ... SUCCESSFULLY ADDED");
+        Main.getInstance().getLogger().info("ALTAR WITH ID " + altar.getId() + " SUCCESSFULLY ADDED");
     }
 
     public void clearAll() {
-        cancel();
+        //cancel();
         for (Altar altar : altars.values()) {
             if(altar.getPvpChanger()==null) continue;
             if (altar.getPvpChanger().hologram != null) {
@@ -53,8 +53,10 @@ public class AltarManager extends BukkitRunnable implements Listener {
     @SuppressWarnings("deprecation")
     @Override
     public void run() {
+        Bukkit.getConsoleSender().sendMessage("0");
         for (Altar altar : altars.values()) {
             try {
+                Bukkit.getConsoleSender().sendMessage("1");
                 altar.UpdateTimer(altar.getNearbyPlayers());
                 //reward players
                 for (Player player : altar.getRewardedPlayers()) {
@@ -71,7 +73,7 @@ public class AltarManager extends BukkitRunnable implements Listener {
                         player.sendMessage(message);
                     }
                     player.sendTitle(title, subtitle);
-                    player.playSound(player.getLocation(), Sound.valueOf(ConfigFile.ConfigClass.reward_sound), ConfigFile.ConfigClass.sound_param1, ConfigFile.ConfigClass.sound_param2);
+                    player.playSound(player.getLocation(), Sound.valueOf(ConfigFile.ConfigClass.reward_sound), (float) ConfigFile.ConfigClass.sound_param1,  (float)ConfigFile.ConfigClass.sound_param2);
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ConfigFile.ConfigClass.msg_rewarded));
                 }
                 altar.clearRewarded();
@@ -114,6 +116,7 @@ public class AltarManager extends BukkitRunnable implements Listener {
                             player.getInventory().remove(event.getItem());
                             player.sendMessage("§aAltar has been successfully added");
                             event.setCancelled(true);
+                            return;
                         }
                         wand.loc = event.getClickedBlock().getLocation();
                         Altar altar = new Altar(wand);
