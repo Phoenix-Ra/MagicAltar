@@ -67,7 +67,7 @@ public class Main extends JavaPlugin {
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String newVersion=reader.readLine();
             if (!newVersion.equals(currentVersion)) {
-                Bukkit.getConsoleSender().sendMessage("§6A new version available! Download §MagicAltar v"
+                Bukkit.getConsoleSender().sendMessage("§6A new version available! Download §6MagicAltar v"
                         +newVersion+" §6at https://www.spigotmc.org/resources/104593/");
             }
         }
