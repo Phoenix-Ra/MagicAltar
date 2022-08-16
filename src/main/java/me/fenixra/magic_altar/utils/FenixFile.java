@@ -77,6 +77,7 @@ public abstract class FenixFile {
                     }
                     if(f.getType()==String.class) {
                         pw.println(key.space()+path+": " + "'" + f.get(fileClass.getReference(i)) + "'");
+                        f.set(fileClass.getReference(i),Utils.colorFormat(((String)f.get(fileClass.getReference(i)))).replace("\\n","\n"));
                         continue;
                     }
                     if(f.getType()==boolean.class) {
@@ -85,10 +86,13 @@ public abstract class FenixFile {
                     }
                     if(f.getType()== List.class) {
                         List<String> var = (List<String>) f.get(fileClass.getReference(i));
+                        List<String> list=new ArrayList<>();
                         pw.println(key.space()+path + ":");
-                        for(String l : var){
-                            pw.println(key.space()+"- '"+l+"'");
+                        for(String s : var){
+                            pw.println(key.space()+"- '"+s+"'");
+                            list.add(Utils.colorFormat(s).replace("\\n","\n"));
                         }
+                        f.set(fileClass.getReference(i), list);
                     }
                 }
                 pw.close();
