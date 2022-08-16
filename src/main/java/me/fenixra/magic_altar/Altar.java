@@ -77,10 +77,9 @@ public class Altar {
 
     public List<Player> getNearbyPlayers() {
         ArrayList<Player> arrayList = new ArrayList<>();
-        for (Entity entity : loc.getWorld().getEntities()) {
-            if (!this.isInBorder(loc, entity.getLocation(), radius)) continue;
-            if (!(entity instanceof Player)) continue;
-            arrayList.add((Player) entity);
+        for (Player player : loc.getWorld().getPlayers()) {
+            if (!this.isInBorder(loc, player.getLocation(), radius)) continue;
+            arrayList.add(player);
         }
 
         return arrayList;
@@ -120,6 +119,7 @@ public class Altar {
             players.put(p, 0);
         }
         for (Map.Entry<Player, Integer> entry : players.entrySet()) {
+            Bukkit.getConsoleSender().sendMessage("2");
             players.put(entry.getKey(), entry.getValue() + 1);
             entry.getKey().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ConfigFile.ConfigClass.msg_reward_time_left.replace("{time}",""+(frequency - players.get(entry.getKey())) )));
         }
@@ -132,6 +132,25 @@ public class Altar {
 
             }
         }
+    }
+
+    public void rewardPlayer(Player player){
+        HashMap<String, String> hm = executeCmds(player);
+        String message = this.message;
+        String title = this.title;
+        String subtitle = this.subtitle;
+        for (Map.Entry<String, String> entry : hm.entrySet()) {
+            message = message.replace(entry.getKey(), entry.getValue());
+            title = title.replace(entry.getKey(), entry.getValue());
+            subtitle = subtitle.replace(entry.getKey(), entry.getValue());
+        }
+        if (!message.equals("null")) {
+            player.sendMessage(message);
+        }
+        player.sendTitle(title, subtitle);
+        player.playSound(player.getLocation(), Sound.valueOf(ConfigFile.ConfigClass.reward_sound), (float) ConfigFile.ConfigClass.sound_param1,  (float)ConfigFile.ConfigClass.sound_param2);
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ConfigFile.ConfigClass.msg_rewarded));
+
     }
 
     public List<Player> getRewardedPlayers() {
@@ -199,7 +218,7 @@ public class Altar {
             this.altar = altar;
             frequency = data.getInt("altars." + altar.id + ".pvpChange.frequency");
             timer = frequency;
-            hologram = new Hologram(altar.loc);
+            hologram = new Hologram(altar.loc, -0.2);
             this.updateHolo();
             List<String> cmds = data.getStringList("altars." + altar.id + ".pvpChange.off.cmds");
 
