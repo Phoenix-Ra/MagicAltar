@@ -37,11 +37,11 @@ public class Utils {
         long n5 = (long)((double)n3 * f);
         long n6 = n3 - n5;
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(org.bukkit.ChatColor.translateAlternateColorCodes((char)'&', (String)string2));
+        stringBuilder.append(org.bukkit.ChatColor.translateAlternateColorCodes('&', string2));
         for (n4 = 0; n4 < n5; ++n4) {
             stringBuilder.append(string);
         }
-        stringBuilder.append(org.bukkit.ChatColor.translateAlternateColorCodes((char)'&', (String)string3));
+        stringBuilder.append(org.bukkit.ChatColor.translateAlternateColorCodes('&', string3));
         for (n4 = 0; n4 < n6; ++n4) {
             stringBuilder.append(string);
         }
