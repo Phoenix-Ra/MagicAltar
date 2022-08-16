@@ -50,7 +50,7 @@ altars:
         sound: entity_wither_spawn:1.5f:1.5f
         reward-on-kill:
           - givejuicypoints {player} sp {donator_num-1}
-          - msg:&6MagicAltar &a➔ &cYou received a reward for killing a player!
+          - msg:&6MagicAltar &a-> &cYou received a reward for killing a player!
           - title:&a+{donator_num-1} Points
         #Hologram displayed in that state
         holo:
