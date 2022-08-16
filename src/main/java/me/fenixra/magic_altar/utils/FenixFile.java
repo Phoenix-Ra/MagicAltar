@@ -25,7 +25,7 @@ public abstract class FenixFile {
     @SuppressWarnings("unchecked")
     public boolean load() {
         File = new File(fileM.getPlugin().getDataFolder(), fileName+".yml");
-        if(File.exists() && !File.isDirectory()) {
+        if(File.exists()) {
             return reload();
         }
         if(fileClass!=null) {
@@ -165,10 +165,7 @@ public abstract class FenixFile {
                 return false;
             }
         }
-        if(!reloadAction()) {
-            return false;
-        }
-        return save();
+        return reloadAction();
     }
     public boolean save() {
         try {

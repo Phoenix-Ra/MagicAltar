@@ -89,6 +89,19 @@ public class Altar {
             }
         }
     }
+    public void prepareForEdit(){
+        if(pvpChanger!=null){
+            pvpChanger.hologram.setVisible(false);
+            pvpChanger.timer= pvpChanger.frequency;
+        }
+        players.clear();
+    }
+    public void FinishEdit(){
+        if(pvpChanger!=null){
+            pvpChanger.hologram.teleport(getBlockLocation());
+            pvpChanger.hologram.setVisible(true);
+        }
+    }
 
     public void rewardPlayer(Player player) {
         executeRewardCommands(player);
@@ -263,7 +276,6 @@ public class Altar {
             hologram.setLines(lines);
 
         }
-
         public void changeState() {
             FileConfiguration data = Main.getInstance().getDataFile().getFileC();
 

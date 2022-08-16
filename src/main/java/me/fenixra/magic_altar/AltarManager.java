@@ -88,6 +88,7 @@ public class AltarManager extends BukkitRunnable implements Listener {
                         SetupWand wand = setups.get(player);
                         if (wand.getAltar() != null) {
                             wand.getAltar().setLocation(event.getClickedBlock().getLocation());
+                            wand.getAltar().FinishEdit();
                             this.addAltar(wand.getAltar());
                             Main.getInstance().getDataFile().addAltar(wand.getAltar());
                             player.getInventory().remove(event.getItem());

@@ -96,6 +96,7 @@ public class AltarCommand extends FenixCommand {
             return;
         }
         plugin.getAltarM().removeAltar(id);
+        altar.prepareForEdit();
         plugin.getAltarM().giveSetupWand(player, altar);
         this.reply("&aSuccess! We gave you a special stick. Click with that stick on the block u want to make an altar");
 
