@@ -91,7 +91,7 @@ public class Altar {
     }
     public void prepareForEdit(){
         if(pvpChanger!=null){
-            pvpChanger.hologram.setVisible(false);
+            pvpChanger.hologram.remove();
             pvpChanger.timer= pvpChanger.frequency;
         }
         players.clear();
