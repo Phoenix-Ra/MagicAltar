@@ -24,7 +24,7 @@ public class DataFile extends FenixFile {
 
     @Override
     public boolean reloadAction() {
-        Main.getInstance().getAltarM().clearAll();
+        Main.getInstance().getAltarM().clearAll(false);
         SetupAltars();
         return true;
     }
@@ -95,9 +95,9 @@ public class DataFile extends FenixFile {
         this.getFileC().set("altars."+path+".radius", altar.getRadius());
         this.getFileC().set("altars."+path+".cmds", Arrays.asList("eco give {player} 10"));
         this.getFileC().set("altars."+path+".frequency", altar.getFrequency());
-        this.getFileC().set("altars."+path+".title", altar.title);
-        this.getFileC().set("altars."+path+".subtitle", altar.subtitle);
-        this.getFileC().set("altars."+path+".message", altar.message);
+        this.getFileC().set("altars."+path+".title", altar.getRewardTitle());
+        this.getFileC().set("altars."+path+".subtitle", altar.getRewardSubtitle());
+        this.getFileC().set("altars."+path+".message", altar.getRewardMessage());
         this.save();
     }
 

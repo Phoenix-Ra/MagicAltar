@@ -72,7 +72,10 @@ public class Hologram {
             if (isValidIndex(i)) {
                 if(!this.lines.get(i).getCustomName().equals(lines.get(i))) this.lines.get(i).setCustomName(lines.get(i));
             }
-            else createLine(teleportTo.add(0, this.height, 0), lines.get(i));
+            else{
+                createLine(teleportTo.add(0, this.height, 0), lines.get(i));
+                setVisible(i,true);
+            }
 
     }
 

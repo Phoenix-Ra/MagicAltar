@@ -4,7 +4,6 @@ import me.fenixra.magic_altar.files.ConfigFile;
 import me.fenixra.magic_altar.files.DataFile;
 import me.fenixra.magic_altar.utils.FenixFileManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class Main extends JavaPlugin {
     private static Main instance;
@@ -17,9 +16,9 @@ public class Main extends JavaPlugin {
 
         Main.getInstance().getCommand("altar").setExecutor(new AltarCommand(Main.getInstance()));
         altarM=new AltarManager();
-                fileManager=new FenixFileManager(Main.getInstance());
-                fileManager.addFile(new ConfigFile(fileManager)).addFile(new DataFile(fileManager));
-                fileManager.loadfiles();
+        fileManager=new FenixFileManager(Main.getInstance());
+        fileManager.addFile(new ConfigFile(fileManager)).addFile(new DataFile(fileManager));
+        fileManager.loadfiles();
     }
 
     public void reload(){
@@ -29,7 +28,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        altarM.clearAll();
+        altarM.clearAll(true);
 
     }
 

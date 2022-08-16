@@ -55,7 +55,7 @@ public class AltarCommand extends FenixCommand {
             final SubCommand info = methods.get(entry).getAnnotation(SubCommand.class);
             final String usage = info.usage().isEmpty() ? "" : (" " + (info.usage()));
             final String desc = info.description();
-            this.sender.sendMessage(Utils.colorFormat(usage + " &7- &f" + desc));
+            this.sender.sendMessage(Utils.colorFormat("&e"+usage + " &7- &f" + desc));
         }
 
 

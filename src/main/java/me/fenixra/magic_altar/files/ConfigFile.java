@@ -34,6 +34,10 @@ public class ConfigFile extends FenixFile {
         @ConfigKey(path="sound_param2", space= "")
         public static double sound_param2=1.0f;
 
+        @ConfigHeader(value = { "#Height between hologram lines"})
+        @ConfigKey(path="holoLines_distance", space= "")
+        public static double heightBetweenHoloLines=0.25f;
+
         @ConfigHeader(value = { "#Action_bar msg that shows how much time left before reward"})
         @ConfigKey(path="msg_reward_time_left", space= "")
         public static String msg_reward_time_left="&c{time}s &aLeft";
@@ -44,7 +48,7 @@ public class ConfigFile extends FenixFile {
 
 
         public Object getReference(int number) {
-            Object[] ob = {reward_sound,sound_param1,sound_param2,msg_reward_time_left,msg_rewarded};
+            Object[] ob = {reward_sound,sound_param1,sound_param2,heightBetweenHoloLines,msg_reward_time_left,msg_rewarded};
             return ob[number];
         }
     }
