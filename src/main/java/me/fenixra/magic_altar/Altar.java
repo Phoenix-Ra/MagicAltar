@@ -3,11 +3,14 @@ package me.fenixra.magic_altar;
 import me.fenixra.magic_altar.files.ConfigFile;
 import me.fenixra.magic_altar.utils.Hologram;
 import me.fenixra.magic_altar.utils.Utils;
+import me.fenixra.magic_altar.utils.effects.CustomLocation;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -277,26 +280,25 @@ public class Altar {
 
         }
         public void changeState() {
-            FileConfiguration data = Main.getInstance().getAltarsPackage().getAltarConfig(altar.getId());
-
-            String stateString = state ? "off" : "on";
+            ConfigurationSection data= Main.getInstance().getAltarsPackage().getAltarConfig(altar.getId()).
+                    getConfigurationSection("pvpChange."+(state?"off":"on"));
             Sound sound = null;
             float n = 1.0f;
             float n1 = 1.0f;
-            if (data.contains("pvpChange." + stateString + ".sound")) {
-                sound = Sound.valueOf(data.getString("pvpChange." + stateString + ".sound").split(":")[0].toUpperCase());
-                n = Float.parseFloat(data.getString("pvpChange." + stateString + ".sound").split(":")[1]);
-                n1 = Float.parseFloat(data.getString("pvpChange." + stateString + ".sound").split(":")[2]);
+            if (data.contains("sound")) {
+                sound = Sound.valueOf(data.getString("sound").split(":")[0].toUpperCase());
+                n = Float.parseFloat(data.getString( "sound").split(":")[1]);
+                n1 = Float.parseFloat(data.getString("sound").split(":")[2]);
             }
 
             //Inform players
-            String msg = data.getString("pvpChange." + stateString + ".msg");
+            String msg = data.getString("msg");
             if (msg != null) msg = Utils.colorFormat(msg);
 
-            String title = data.getString( "pvpChange." + stateString + ".title");
+            String title = data.getString( "title");
             if (title != null) title = Utils.colorFormat(title);
 
-            String subTitle = data.getString("pvpChange." + stateString + ".subtitle");
+            String subTitle = data.getString("subtitle");
             if (subTitle != null) subTitle = Utils.colorFormat(subTitle);
 
             for (Player p : altar.getNearbyPlayers()) {
@@ -312,13 +314,17 @@ public class Altar {
             }
 
             //ChangeState commands
-            List<String> cmds = data.getStringList("pvpChange." + stateString + ".commands");
+            List<String> cmds = data.getStringList("commands");
             for (String s : cmds) {
                 Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), s);
             }
 
             state = !state;
             timer = frequency;
+
+            if(data.contains("effect-on-activation")){
+                launchEffect(data);
+            }
         }
 
 
@@ -339,6 +345,21 @@ public class Altar {
                     }
                 }
             }
+        }
+
+        private void launchEffect(ConfigurationSection data){
+            CircleEffect effect=new CircleEffect(Main.getInstance().getEffectManager());
+            effect.setLocation(new CustomLocation(hologram.getLocation()));
+            effect.setRadius(1);
+            effect.setRadiusIncrementer(0.2);
+            effect.setIterations(data.contains("effect-on-activation.iterations")?
+                    data.getInt("effect-on-activation.iterations") : 20);
+            effect.setThickness(data.contains("effect-on-activation.thickness")?
+                    data.getDouble("effect-on-activation.thickness") : 0.35);
+            effect.setParticleColor(data.contains("effect-on-activation.color")?
+                    Utils.parseColor(data.getString("effect-on-activation.color")) : !state? Color.GREEN:Color.RED);
+            Main.getInstance().getEffectManager().startEffect(effect);
+
         }
 
         public boolean getCurrentState() {

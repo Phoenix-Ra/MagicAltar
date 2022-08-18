@@ -3,6 +3,7 @@ package me.fenixra.magic_altar;
 import me.fenixra.magic_altar.files.AltarsPackage;
 import me.fenixra.magic_altar.files.ConfigFile;
 import me.fenixra.magic_altar.utils.FenixFileManager;
+import me.fenixra.magic_altar.utils.effects.FenixEffectManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,6 +19,7 @@ public class Main extends JavaPlugin {
     private AltarManager altarM;
     private FenixFileManager fileManager;
     private AltarsPackage altarsPackage;
+    private FenixEffectManager effectManager;
 
     @Override
     public void onEnable() {
@@ -30,6 +32,7 @@ public class Main extends JavaPlugin {
         fileManager.loadfiles();
         altarsPackage=new AltarsPackage();
         altarsPackage.reloadAction();
+        effectManager=new FenixEffectManager(this);
         try {
             if ((new Metrics(this, 16158)).isEnabled()) {
                 Bukkit.getConsoleSender().sendMessage("§7Metrics loaded successfully");
@@ -96,5 +99,8 @@ public class Main extends JavaPlugin {
     }
     public AltarsPackage getAltarsPackage() {
         return altarsPackage;
+    }
+    public FenixEffectManager getEffectManager(){
+        return effectManager;
     }
 }

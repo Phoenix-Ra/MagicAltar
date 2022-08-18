@@ -126,7 +126,6 @@ public class AltarManager extends BukkitRunnable implements Listener {
             }
         }
     }
-
     public Altar getAltar(String id) {
         return altars.get(id);
     }

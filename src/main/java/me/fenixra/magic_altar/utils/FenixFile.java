@@ -10,7 +10,7 @@ import java.util.List;
 
 public abstract class FenixFile {
     private final String fileName;
-    private java.io.File File;
+    private java.io.File file;
     private FileConfiguration fileConf;
     private final FenixFileManager fileM;
     private final FenixFileClass fileClass;
@@ -24,12 +24,13 @@ public abstract class FenixFile {
 
     @SuppressWarnings("unchecked")
     public boolean load() {
-        File = new File(fileM.getPlugin().getDataFolder(), fileName+".yml");
-        if(File.exists()) {
+        file = new File(fileM.getPlugin().getDataFolder(), fileName+".yml");
+        if(file.exists()) {
             return reload();
         }
+        if(!fileM.getPlugin().getDataFolder().exists()) fileM.getPlugin().getDataFolder().mkdir();
         if(fileClass!=null) {
-            fileConf = fileM.loadFromResource(fileName+".yml", File, false);
+            fileConf = fileM.loadFromResource(fileName+".yml", file, false);
             PrintWriter pw;
             try {
                 pw = new PrintWriter(this.getFile());
@@ -101,7 +102,7 @@ public abstract class FenixFile {
                 return false;
             }
         }else {
-            fileConf = fileM.loadFromResource(fileName+".yml", File, true);
+            fileConf = fileM.loadFromResource(fileName+".yml", file, true);
         }
         try {
             if(!handleLoad()) {
@@ -116,7 +117,7 @@ public abstract class FenixFile {
 
     }
     public boolean reload() {
-        fileConf= YamlConfiguration.loadConfiguration(File);
+        fileConf= YamlConfiguration.loadConfiguration(file);
         if(fileClass!=null) {
             try {
                 int i = -1;
@@ -173,7 +174,7 @@ public abstract class FenixFile {
     }
     public boolean save() {
         try {
-            fileConf.save(File);
+            fileConf.save(file);
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -204,7 +205,7 @@ public abstract class FenixFile {
         return fileName;
     }
     public File getFile() {
-        return File;
+        return file;
     }
 
 }

@@ -3,6 +3,7 @@ package me.fenixra.magic_altar.utils;
 
 import me.fenixra.magic_altar.Main;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Color;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -49,5 +50,61 @@ public class Utils {
             stringBuilder.append(string);
         }
         return stringBuilder.toString();
+    }
+
+    public static Color parseColor(String s){
+        Color color;
+        switch (s.toLowerCase()){
+            case "aqua":
+                color=Color.AQUA;
+                break;
+            case "red":
+                color=Color.RED;
+                break;
+            case "green":
+                color=Color.GREEN;
+                break;
+            case "blue":
+                color=Color.BLUE;
+                break;
+            case "fuchsia":
+                color=Color.FUCHSIA;
+                break;
+            case "gray":
+                color=Color.GRAY;
+                break;
+            case "lime":
+                color=Color.LIME;
+                break;
+            case "maroon":
+                color=Color.MAROON;
+                break;
+            case "navy":
+                color=Color.NAVY;
+                break;
+            case "olive":
+                color=Color.OLIVE;
+                break;
+            case "orange":
+                color=Color.ORANGE;
+                break;
+            case "purple":
+                color=Color.PURPLE;
+                break;
+            case "silver":
+                color=Color.SILVER;
+                break;
+            case "teal":
+                color=Color.TEAL;
+                break;
+            case "yellow":
+                color=Color.YELLOW;
+                break;
+            default:
+                color=Color.WHITE;
+                break;
+
+        }
+        return color;
     }
 }
