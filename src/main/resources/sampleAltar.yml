@@ -53,7 +53,7 @@ pvpChange:
       #affects on the total amount of particles
       thickness: 0.35
       iterations: 20
-      #increases radius of effect each iterations
+      #increases radius of effect each iteration
       radius_incrementer: 0.1
       starting_radius: 1
       rotation: 0;0;0
