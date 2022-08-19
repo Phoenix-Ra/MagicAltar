@@ -47,7 +47,10 @@ pvpChange:
     #Play sound who in radius of an altar
     sound: entity_wither_spawn:1.5f:1.5f
     effect-on-activation:
+      #Color of the particles. You can find all available colors here:
+      #https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Color.html
       color: red
+      #affects on the total amount of particles
       thickness: 0.35
       iterations: 20
       #increases radius of effect each iterations
@@ -75,6 +78,10 @@ pvpChange:
     title: '&aPvp is off!'
     subtitle: '&cMagicAltar example'
     sound: ENTITY_WITCH_AMBIENT:1.5f:1.5f
+    effect-on-activation:
+      color: lime
+      thickness: 0.35
+      iterations: 20
     holo:
       - '&eStatus:'
       - '&c&lx &nPvP disabled&c&l x'
