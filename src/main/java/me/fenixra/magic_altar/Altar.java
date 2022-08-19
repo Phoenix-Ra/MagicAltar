@@ -13,6 +13,7 @@ import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -350,14 +351,26 @@ public class Altar {
         private void launchEffect(ConfigurationSection data){
             CircleEffect effect=new CircleEffect(Main.getInstance().getEffectManager());
             effect.setLocation(new CustomLocation(hologram.getLocation()));
-            effect.setRadius(1);
-            effect.setRadiusIncrementer(0.2);
+            effect.setRadius(data.contains("effect-on-activation.starting_radius")?
+                    data.getDouble("effect-on-activation.starting_radius") : 1);
+            effect.setRadiusIncrementer(data.contains("effect-on-activation.radius_incrementer")?
+                    data.getDouble("effect-on-activation.radius_incrementer") : 0.2);
+
             effect.setIterations(data.contains("effect-on-activation.iterations")?
                     data.getInt("effect-on-activation.iterations") : 20);
             effect.setThickness(data.contains("effect-on-activation.thickness")?
                     data.getDouble("effect-on-activation.thickness") : 0.35);
             effect.setParticleColor(data.contains("effect-on-activation.color")?
                     Utils.parseColor(data.getString("effect-on-activation.color")) : !state? Color.GREEN:Color.RED);
+
+            if(data.contains("effect-on-activation.rotation")){
+                String[] rotation=data.getString("effect-on-activation.rotation").split(";");
+                if(rotation.length<3){
+                    Bukkit.getLogger().severe("altar with id "+altar.getId()+" incorrectly configured! Rotation value of effect is incorrect. There should be: rotationX;rotationY;rotationZ");
+                }else{
+                    effect.setRotation(new Vector(Double.parseDouble(rotation[0]),Double.parseDouble(rotation[1]),Double.parseDouble(rotation[2])));
+                }
+            }
             Main.getInstance().getEffectManager().startEffect(effect);
 
         }

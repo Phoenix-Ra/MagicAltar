@@ -42,14 +42,11 @@ public class CircleEffect implements FenixEffect {
             for (int i = 0; i < particles; i++) {
                 vector.setX(radius * Math.sin(step * i));
                 vector.setZ(radius * Math.cos(step * i));
+                vector.setY(1);
                 if (rotation != null) {
-                    Vector rotationVec=vector.clone();
-                    vector.rotateAroundX(rotationVec.getX() *  Math.PI / 180);
-                    vector.rotateAroundY(rotationVec.getY() *  Math.PI / 180);
-                    vector.rotateAroundZ(rotationVec.getZ() *  Math.PI / 180);
-                    displayParticle(particle, location.add(rotationVec), particleColor,1);
-                    location.subtract(rotationVec);
-                    continue;
+                    vector.rotateAroundX(rotation.getX() *  Math.PI / 180);
+                    vector.rotateAroundY(rotation.getY() *  Math.PI / 180);
+                    vector.rotateAroundZ(rotation.getZ() *  Math.PI / 180);
                 }
                 displayParticle(particle, location.add(vector),particleColor,1);
                 location.subtract(vector);
@@ -108,7 +105,7 @@ public class CircleEffect implements FenixEffect {
     protected void setRadiusIncrementer(double value) {
         this.radiusIncrementer = value;
     }
-    protected void setRadiusIncrementer(Vector value) {
+    protected void setRotation(Vector value) {
         this.rotation = value;
     }
 }

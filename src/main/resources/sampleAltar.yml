@@ -50,6 +50,10 @@ pvpChange:
       color: red
       thickness: 0.35
       iterations: 20
+      #increases radius of effect each iterations
+      radius_incrementer: 0.1
+      starting_radius: 1
+      rotation: 0;0;0
     reward-on-kill:
       - givejuicypoints {player} sp {donator_num-1}
       - msg:&6MagicAltar &a-> &cYou received a reward for killing a player!
